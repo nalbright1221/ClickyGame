@@ -1,8 +1,16 @@
 import React from "react";
 import Title from "./Title/Title";
-// import Nav from "./Nav/Nav";
+import Nav from "./Nav/Nav";
 import Card from "./Card/Card";
 
+
+function shuffleCards(cards) {
+  for (let i = cards.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+  return cards;
+};
 
 // By extending the React.Component class, Counter inherits functionality from it
 class Clicky extends React.Component {
@@ -64,12 +72,31 @@ class Clicky extends React.Component {
     ]
     };
 
-     handleClick = (id) => {
+   
 
+
+     handleClick = (id) => {
+      console.log(id);
+      let array = [1,2,3,4,5];
+      let shuffled = shuffleCards(this.state.cards);
+      this.setState({cards: shuffled});
+      if (this.state.alreadyClicked.indexOf(id) === -1) {
+       let temp = this.state.alreadyClicked;
+        temp.push(id);
+        this.setState({alreadyClicked:temp, currentScore: this.state.currentScore + 1});
+      }
+      else { 
+        if(this.state.topScore < this.state.currentScore) {
+          this.setState({topScore:this.state.currentScore})
+        }
+        this.setState({currentScore:0})
+  //losing code 
+}     
      }
 
   componentDidMount = () => {
       console.log('!!')
+      console.log(this.state)
   }
 
   // The render method returns the JSX that should be rendered
@@ -77,6 +104,11 @@ class Clicky extends React.Component {
     return (
       <div>
  
+  <Nav 
+  score= {this.state.currentScore}
+  newTopScore = {this.state.topScore}>
+
+  </Nav>
 
       <Title>
         Click on an image to increase your score.
@@ -85,13 +117,13 @@ class Clicky extends React.Component {
       </Title>
 
       
-      <div>
+      <div style={{display:"flex"}}>
           {this.state.cards.map((card) => {
               return (
                 <Card 
                   handleClick = {this.handleClick} 
-                  key = {card.key}
                   src = {card.src}
+                  id = {card.key}
                 />
               )
           })}
