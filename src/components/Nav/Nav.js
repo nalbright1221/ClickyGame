@@ -13,6 +13,10 @@ function Nav(props) {
       <h1 id="cur-sco">Current Score: {props.score} </h1>
 
       <h1 id="top-sco">Top Score: {props.newTopScore}</h1>
+
+      <h1 id="right-wrong"> {props.showRightWrong}</h1>
+
+
     
   </nav>)
 }

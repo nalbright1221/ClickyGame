@@ -18,6 +18,7 @@ class Clicky extends React.Component {
   state = {
     topScore: 0,
     currentScore: 0,
+    rightWrong: "",
     alreadyClicked:  [],
     cards: [
 
@@ -72,30 +73,35 @@ class Clicky extends React.Component {
     ]
     };
 
-   
-
-
-     handleClick = (id) => {
+  handleClick = (id) => {
       console.log(id);
-      let array = [1,2,3,4,5];
       let shuffled = shuffleCards(this.state.cards);
       this.setState({cards: shuffled});
       if (this.state.alreadyClicked.indexOf(id) === -1) {
        let temp = this.state.alreadyClicked;
         temp.push(id);
-        this.setState({alreadyClicked:temp, currentScore: this.state.currentScore + 1});
+        this.setState({
+          alreadyClicked:temp, 
+          currentScore: this.state.currentScore + 1,
+          rightWrong: "Correct Click, Keep Clicking!!"});
       }
+
       else { 
         if(this.state.topScore < this.state.currentScore) {
-          this.setState({topScore:this.state.currentScore})
+          this.setState({
+            topScore:this.state.currentScore,
+            rightWrong: "Sorry, you clicked the wrong card. Start Over."
+          })
         }
         this.setState({currentScore:0})
-  //losing code 
-}     
+}  
+
+ if (this.state.currentScore === 12) {
+  this.setState({ rightWrong: "You win!" });
+}
      }
 
   componentDidMount = () => {
-      console.log('!!')
       console.log(this.state)
   }
 
@@ -106,7 +112,8 @@ class Clicky extends React.Component {
  
   <Nav 
   score= {this.state.currentScore}
-  newTopScore = {this.state.topScore}>
+  newTopScore = {this.state.topScore}
+  showRightWrong = {this.state.rightWrong}>
 
   </Nav>
 
