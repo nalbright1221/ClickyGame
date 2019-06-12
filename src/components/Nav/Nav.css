@@ -1,0 +1,26 @@
+#cur-sco {
+  text-align: center; 
+  float: left;
+  margin-left: 100px;
+}
+
+#top-sco {
+    text-align: center;
+    float:right;
+    margin-right: 100px;
+}
+
+
+#right-wrong {
+    text-align: center;
+}
+
+.brand {
+    text-align: center;
+    background-color: midnightblue;
+    height:50px;
+    color:white;
+    
+}
+
+

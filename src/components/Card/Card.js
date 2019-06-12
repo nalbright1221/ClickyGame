@@ -2,17 +2,21 @@ import React from "react"
 import "./Card.css"
 
 function Card(props) {
-   console.log(props);
+//    console.log(props);
     return(
-        <div
-            className="card"
+   
+        <div class="column">
+        <div 
+            className="card column"
             value={props.id}
             onClick={() => props.handleClick(props.id)}
         >
 
-            <h1>{props.id} </h1>
+         
             <img alt={props.id}  src={props.src} />
             </div>
+            </div>
+       
     )
 };
 
